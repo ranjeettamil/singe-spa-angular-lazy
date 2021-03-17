@@ -10,10 +10,9 @@
     <script type="systemjs-importmap">
       {
         "imports": {
-          "app1": "https://electrificationportal-wa-dev-01.azurewebsites.net/app1/main.js",
-          "lazy": "https://electrificationportal-wa-dev-01.azurewebsites.net/app1/2.js",
-          "app2": "https://electrificationportal-wa-dev-01.azurewebsites.net/app2/main.js",
-          "navbar": "https://electrificationportal-wa-dev-01.azurewebsites.net/navbar/main.js",
+          "app1": "http://localhost:4201/main.js",
+          "app2": "http://localhost:4202/main.js",
+          "navbar": "http://localhost:4300/main.js",
           "single-spa": "https://cdnjs.cloudflare.com/ajax/libs/single-spa/4.3.5/system/single-spa.min.js"
         }
       }
@@ -46,19 +45,10 @@
             return System.import('app1');
           },
           function (location) {
-            return location.hash.startsWith('#/app1');
+            return location.pathname.startsWith('/app1');
           }
         );
 
-        singleSpa.registerApplication(
-          'lazy',
-          function () {
-            return System.import('lazy');
-          },
-          function (location) {
-            return location.hash.startsWith('#/lazy');
-          }
-        );
 
         singleSpa.registerApplication(
           'app2',
@@ -66,7 +56,7 @@
             return System.import('app2');
           },
           function (location) {
-            return location.hash.startsWith('#/app2');
+            return location.pathname.startsWith('/app2');
           }
         )
 
