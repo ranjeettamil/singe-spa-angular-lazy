@@ -1,6 +1,6 @@
 
-import { setPublicPath } from 'systemjs-webpack-interop'; 
-setPublicPath('app1');
+// import { setPublicPath } from 'systemjs-webpack-interop'; 
+// setPublicPath('app1');
 
 import { enableProdMode, NgZone } from '@angular/core';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
