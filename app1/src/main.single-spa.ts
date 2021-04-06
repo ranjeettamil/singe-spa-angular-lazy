@@ -1,13 +1,10 @@
 
-// import { setPublicPath } from 'systemjs-webpack-interop'; 
-// setPublicPath('app1');
-
 import { enableProdMode, NgZone } from '@angular/core';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
-import { Router } from '@angular/router';
+import { Router, NavigationStart } from '@angular/router';
 import { AppModule } from './app/app.module';
 import { environment } from './environments/environment';
-import singleSpaAngular from 'single-spa-angular';
+import { singleSpaAngular, getSingleSpaExtraProviders } from 'single-spa-angular';
 import { singleSpaPropsSubject } from './single-spa/single-spa-props';
 
 if (environment.production) {
@@ -17,11 +14,12 @@ if (environment.production) {
 const lifecycles = singleSpaAngular({
   bootstrapFunction: singleSpaProps => {
     singleSpaPropsSubject.next(singleSpaProps);
-    return platformBrowserDynamic().bootstrapModule(AppModule);
+    return platformBrowserDynamic(getSingleSpaExtraProviders()).bootstrapModule(AppModule);
   },
   template: '<app1-root />',
   Router,
-  NgZone: NgZone,
+  NgZone,
+  NavigationStart,
 });
 
 export const bootstrap = lifecycles.bootstrap;
